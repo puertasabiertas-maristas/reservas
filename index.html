@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Accediendo a la reserva...</title>
+<style>
+  body { font-family: sans-serif; text-align: center; padding-top: 50px; color: #555; }
+  .loader { border: 5px solid #f3f3f3; border-top: 5px solid #0055a4; border-radius: 50%; width: 50px; height: 50px; animation: spin 1s linear infinite; margin: 20px auto; }
+  @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+</style>
+</head>
+<body>
+
+  <div class="loader"></div>
+  <h3>Conectando con el sistema de reservas...</h3>
+  <p>Por favor, espera unos segundos.</p>
+
+  <script>
+    // ----------------------------------------------------
+    // CONFIGURACIÓN: PEGA AQUÍ LA URL DE TU GOOGLE SCRIPT
+    // (La que termina en /exec)
+    var scriptGoogle = "https://script.google.com/a/macros/elpilarmaristas.net/s/AKfycbxmC1uyi1bcq8HYQCXS5VqIUi9vmZcnBHmR6zBKKt_jFfxPtgFKK8RIdT0ng_jfuhY-/exec";
+    // ----------------------------------------------------
+
+    // Lógica de redirección
+    var params = new URLSearchParams(window.location.search);
+    var uid = params.get('uid');
+    var cancel = params.get('cancel');
+
+    // Construir la nueva URL
+    var destino = scriptGoogle;
+    
+    if(uid) {
+        destino += "?uid=" + uid;
+    } else if (cancel) {
+        destino += "?cancel=" + cancel;
+    }
+
+    // Saltar a la aplicación
+    window.location.replace(destino);
+  </script>
+
+</body>
+</html>
